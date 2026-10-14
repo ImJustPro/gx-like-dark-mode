@@ -1,0 +1,23 @@
+{
+  "extName": {
+    "message": "GX-like Dark Mode"
+  },
+  "extDescription": {
+    "message": "Forza il tema scuro su qualsiasi sito dal menu del tasto destro, come in Opera GX. Ricorda la scelta per ogni sito."
+  },
+  "extNameNative": {
+    "message": "GX-like Dark Mode (motore nativo)"
+  },
+  "extDescriptionNative": {
+    "message": "Forza il tema scuro dal menu del tasto destro usando il motore Auto Dark Mode integrato in Chrome, come in Opera GX. Ricorda la scelta per ogni sito."
+  },
+  "menuSite": {
+    "message": "Forza pagina scura"
+  },
+  "menuGlobal": {
+    "message": "Forza scuro su tutti i siti"
+  },
+  "cmdToggle": {
+    "message": "Attiva o disattiva il tema scuro sul sito corrente"
+  }
+}

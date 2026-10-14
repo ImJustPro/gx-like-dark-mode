@@ -1,0 +1,23 @@
+{
+  "extName": {
+    "message": "GX-like Dark Mode"
+  },
+  "extDescription": {
+    "message": "Force dark mode on any website from the right-click menu, like Opera GX. Remembers your choice per site."
+  },
+  "extNameNative": {
+    "message": "GX-like Dark Mode (Native engine)"
+  },
+  "extDescriptionNative": {
+    "message": "Force dark mode from the right-click menu using Chrome's built-in Auto Dark Mode engine, like Opera GX. Remembers your choice per site."
+  },
+  "menuSite": {
+    "message": "Force dark page"
+  },
+  "menuGlobal": {
+    "message": "Force dark on all sites"
+  },
+  "cmdToggle": {
+    "message": "Toggle dark mode for the current site"
+  }
+}

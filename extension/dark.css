@@ -1,0 +1,38 @@
+/* GX-like Dark Mode, CSS filter engine.
+   Everything is scoped to html[data-gx-like-dark="on"], so this stylesheet
+   does nothing until the content script switches a page on. */
+
+/* Invert the whole page, hue-rotate keeps colors close to the original tint. */
+html[data-gx-like-dark="on"] {
+  filter: invert(1) hue-rotate(180deg) !important;
+  background-color: #fff !important;
+}
+
+/* Invert media a second time so photos and videos look normal. */
+html[data-gx-like-dark="on"] :is(
+  img,
+  video,
+  picture,
+  embed,
+  object,
+  svg image,
+  iframe[src*="youtube.com"],
+  iframe[src*="youtube-nocookie.com"],
+  iframe[src*="player.vimeo.com"],
+  iframe[src*="twitch.tv"],
+  iframe[src*="dailymotion.com"]
+) {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* An <img> inside a <picture> is already corrected by its parent. */
+html[data-gx-like-dark="on"] picture :is(img, video) {
+  filter: none !important;
+}
+
+/* A fullscreen element (a video player, a gallery) is drawn outside the
+   page filter, so its media must not be inverted back again. */
+html[data-gx-like-dark="on"] :fullscreen :is(img, video, picture, embed, object, iframe),
+html[data-gx-like-dark="on"] :is(img, video, picture, embed, object, iframe):fullscreen {
+  filter: none !important;
+}
