@@ -1,29 +1,30 @@
 name: Release
 
+# Publish a release on GitHub (tag vX.Y.Z) and this workflow attaches the zips.
 on:
-  push:
-    tags: ["v*"]
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  attach-zips:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Check versions match the tag
+        env:
+          TAG: ${{ github.event.release.tag_name }}
         run: |
           for m in extension/manifest.json extension-native/manifest.json; do
-            v=$(python3 -c "import json;print(json.load(open('$m'))['version'])")
-            test "v$v" = "$GITHUB_REF_NAME" || { echo "$m is $v, tag is $GITHUB_REF_NAME"; exit 1; }
+            v=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['version'])" "$m")
+            test "v$v" = "$TAG" || { echo "$m is $v, tag is $TAG"; exit 1; }
           done
       - name: Build zips
         run: ./scripts/package.sh
-      - name: Publish release
+      - name: Attach zips to the release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "$GITHUB_REF_NAME" dist/*.zip \
-            --title "GX-like Dark Mode ${GITHUB_REF_NAME#v}" \
-            --notes-file .github/release-notes.md
+          TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$TAG" dist/*.zip --clobber
